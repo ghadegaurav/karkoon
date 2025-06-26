@@ -466,6 +466,12 @@ function App() {
     return n.length === 0 ? '' : n.length === 1 ? n[0][0].toUpperCase() : (n[0][0] + n[n.length - 1][0]).toUpperCase();
   }
 
+  useEffect(()=>{
+    console.log(userData)
+    console.log(expenseData)
+    console.log(payData)
+  },[payData,expenseData,userData])
+
   return (
     <div className='min-h-screen w-[100vw] bg-emerald-50 flex justify-center'>
       {/* Main container - centered with max width */}
@@ -560,7 +566,7 @@ function App() {
                         placeholder={`Enter name for user ${Number(user.id) + 1}`}
                         className='flex-1 px-3 py-2 border rounded-lg text-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
                         value={userData[user.id] || ''}
-                        onChange={(e) => handleUserChange(index, e)}
+                        onChange={(e) => handleUserChange(user.id, e)}
                       />
                     </div>
                     <button
