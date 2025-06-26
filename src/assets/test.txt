@@ -1,0 +1,30 @@
+Ghade Pays 140 to Pandit
+Ghade pays 21 to Aditya
+Ghade Pays 211 Hon
+
+Hon Pays 20 to Aditya
+Hon Pays 5 to Pandit
+
+Pandit Pays 55 to Aditya
+
+Aditya Pays 39 to Ghade
+Ghade Pays 190 to Pandit
+Ghade pays 60 to Aditya
+Ghade Pays 250 Hon
+Hon Pays 20 to Aditya
+Hon Pays 140 to Pandit
+Hon Pays 39 to Ghade
+Pandit Pays 135 to Hon
+Pandit Pays 55 to Aditya
+
+
+Naik gives 39 to Ghade
+Ghade Gives 5 to Naik
+Ghade Gives 55 to Naik
+Ghade Gives 250 to Hon
+Ghade gives 140 to Pandit
+Hon gives 20 to Naik
+Hon Gives 39 to Ghade
+Hon gives 140 to Pandit
+Pandit Gives 135 to Hon
+Pandit Gives 55 to Naik

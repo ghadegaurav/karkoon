@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+@import "tailwindcss";
+
+/* index.css or a custom buttons.css */
+:root {
+  /* font-family: 'PT Serif', serif; */
+  font-family: "Lexend", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  /* font-family: system-ui, Avenir, Helvetica, Arial, sans-serif; */
+  line-height: 1.5;
+  font-weight: 400;
+}
+
