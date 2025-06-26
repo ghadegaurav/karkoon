@@ -88,19 +88,6 @@ function App() {
   function clear() {
     setResultVisibility(false)
 
-    setExpenseData([
-      {
-        id: 0,
-        name: "",
-        expenses: [[0, Object.keys(userData).map(e => { return e })]]
-      },
-      {
-        id: 1,
-        name: "",
-        expenses: [[0, Object.keys(userData).map(e => { return e })]]
-      }
-    ]);
-
     setPayData([
       {
         id: '0',
@@ -119,6 +106,21 @@ function App() {
     }
     )
 
+    setExpenseData([
+      {
+        id: '0',
+        name: "",
+        expenses: [[0, ['0','1']]]
+      },
+      {
+        id: '1',
+        name: "",
+        expenses: [[0, ['0','1']]]
+      }
+    ]);
+
+    setCurrentId(2)
+    setNoOfUsers(2)
     // formRef.current.reset();
   }
 
@@ -414,7 +416,7 @@ function App() {
             // console.log('in the else')
             for (const payer of expense[1]) {
               let amountToPay = expense[0] / expense[1].length
-              addPayer(payer, user.id, amountToPay)
+              addPayer(payer, user.id, Number(amountToPay))
             }
           }
         }
@@ -466,11 +468,11 @@ function App() {
     return n.length === 0 ? '' : n.length === 1 ? n[0][0].toUpperCase() : (n[0][0] + n[n.length - 1][0]).toUpperCase();
   }
 
-  // useEffect(()=>{
-  //   console.log(userData)
-  //   console.log(expenseData)
-  //   console.log(payData)
-  // },[payData,expenseData,userData])
+  useEffect(()=>{
+    console.log(userData)
+    console.log(expenseData)
+    console.log(payData)
+  },[payData,expenseData,userData])
 
   return (
     <div className='min-h-screen w-[100vw] bg-emerald-50 flex justify-center'>
@@ -613,6 +615,7 @@ function App() {
                               placeholder='₹ Amount'
                               className='w-20 px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
                               onChange={(e) => handleExpenseAmountChange(index, expIndex, e.target.value)}
+                              value={user.expenses[expIndex][0]==0? '' : user.expenses[expIndex][0]}
                             />
                           </div>
 
@@ -630,7 +633,7 @@ function App() {
                                     {expense[1].slice(0, 8).map((splitUser, expUserIndex) => (
                                       <div
                                         key={splitUser}
-                                        className='w-8 h-8 rounded-full font-semibold bg-blue-100 border-2 border-blue-300 flex items-center justify-center text-blue-800 font-semibold text-xs'
+                                        className='w-8 h-8 rounded-full font-semibold bg-blue-100 border-2 border-blue-300 flex items-center justify-center text-blue-800 text-xs'
                                         style={{
                                           marginLeft: expUserIndex > 0 ? '-8px' : '0',
                                           zIndex: 8 - expUserIndex,
