@@ -466,11 +466,11 @@ function App() {
     return n.length === 0 ? '' : n.length === 1 ? n[0][0].toUpperCase() : (n[0][0] + n[n.length - 1][0]).toUpperCase();
   }
 
-  useEffect(()=>{
-    console.log(userData)
-    console.log(expenseData)
-    console.log(payData)
-  },[payData,expenseData,userData])
+  // useEffect(()=>{
+  //   console.log(userData)
+  //   console.log(expenseData)
+  //   console.log(payData)
+  // },[payData,expenseData,userData])
 
   return (
     <div className='min-h-screen w-[100vw] bg-emerald-50 flex justify-center'>
