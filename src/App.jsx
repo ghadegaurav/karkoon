@@ -33,11 +33,11 @@ function App() {
   const [expenseData, setExpenseData] = useState([
     {
       id: '0',
-      expenses: [[0, Object.keys(userData).map(e => { return e })]]
+      expenses: [['', Object.keys(userData).map(e => { return e })]]
     },
     {
       id: '1',
-      expenses: [[0, Object.keys(userData).map(e => { return e })]]
+      expenses: [['', Object.keys(userData).map(e => { return e })]]
     }]);
 
   function addUser() {
@@ -100,22 +100,22 @@ function App() {
     ])
 
     setUserData(
-    {
-      0: "",
-      1: ""
-    }
+      {
+        0: "",
+        1: ""
+      }
     )
 
     setExpenseData([
       {
         id: '0',
         name: "",
-        expenses: [[0, ['0','1']]]
+        expenses: [['', ['0', '1']]]
       },
       {
         id: '1',
         name: "",
-        expenses: [[0, ['0','1']]]
+        expenses: [['', ['0', '1']]]
       }
     ]);
 
@@ -182,7 +182,7 @@ function App() {
   const addExpense = (index) => {
     setResultVisibility(false)
 
-    let newExpense = [0, Object.keys(userData).map(e => { return e })]
+    let newExpense = [, Object.keys(userData).map(e => { return e })]
     const updatedexpenseData = [...expenseData];
     updatedexpenseData[index] = { ...expenseData[index] };
     updatedexpenseData[index].expenses = [...expenseData[index].expenses];
@@ -241,7 +241,7 @@ function App() {
     setResultVisibility(false)
 
     const updatedexpenseData = [...expenseData];
-    updatedexpenseData[index].expenses[expIndex][0] = Number(value)
+    updatedexpenseData[index].expenses[expIndex][0] = value
     setExpenseData(updatedexpenseData);
   };
 
@@ -405,18 +405,20 @@ function App() {
       // console.log(user)
       for (const expense of user.expenses) {
         // console.log(typeof (expense[0]))
+      
+        const amount  = parseFloat(expense[0])
 
-        if (expense[0] > 0) {
+        if (!isNaN(amount) && amount > 0) {
 
           if (expense[1].includes(user.id) && expense[1].length > 1) {
-            processUserGroups(userGroups, expense[1], user.id, expense[0])
+            processUserGroups(userGroups, expense[1], user.id, amount)
           }
 
-          else if(!expense[1].includes(user.id)) {
+          else if (!expense[1].includes(user.id)) {
             // console.log('in the else')
             for (const payer of expense[1]) {
-              let amountToPay = expense[0] / expense[1].length
-              addPayer(payer, user.id, Number(amountToPay))
+              let amountToPay = amount / expense[1].length
+              addPayer(payer, user.id, Number(amountToPay.toFixed(2)))
             }
           }
         }
@@ -468,11 +470,11 @@ function App() {
     return n.length === 0 ? '' : n.length === 1 ? n[0][0].toUpperCase() : (n[0][0] + n[n.length - 1][0]).toUpperCase();
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(userData)
     console.log(expenseData)
     console.log(payData)
-  },[payData,expenseData,userData])
+  }, [payData, expenseData, userData])
 
   return (
     <div className='min-h-screen w-[100vw] bg-emerald-50 flex justify-center'>
@@ -521,7 +523,6 @@ function App() {
           <div className={`grid duration-300 ease-out ${resultVisibility ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
             <div className='overflow-hidden'>
               <div className='px-4 pb-4'>
-                <div className='text-center py-1 text-gray-500'>Total Users are {noOfUsers}</div>
                 {payData.some(user => user.payTo.length > 0) ? (
                   payData.map((user, userIndex) => {
                     return (
@@ -540,7 +541,7 @@ function App() {
                     );
                   })
                 ) : (
-                  <div className='text-center py-1 text-gray-500'>
+                  <div className='text-center py-4 text-gray-500'>
                     <p>Everything is balanced! 🎉</p>
                     <p className='text-xs mt-1'>Nobody needs to pay anyone</p>
                   </div>
@@ -552,6 +553,11 @@ function App() {
 
         {/* Users and Expenses */}
         <div className='space-y-4'>
+          <div className="flex justify-between mr-3">
+            <div className='text-gray-500'>Total Users are</div>
+            <div>{noOfUsers}</div>
+          </div>
+
           {expenseData.map((user, index) => {
             return (
               <div key={user.id} className='bg-white rounded-lg shadow-sm border'>
@@ -581,8 +587,8 @@ function App() {
 
                   <div className='flex justify-between items-center'>
                     <span className='text-md font-semibold text-black'>Total Expenses:</span>
-                    <span className='font-bold text-xl text-red-900 mr-1 font-sans'>
-                      ₹{user.expenses.reduce((total, exp) => total + exp[0], 0)}
+                    <span className='font-bold text-xl text-red-900 mr-1'>
+                      <span className="font-sans">₹</span>{user.expenses.reduce((total, exp) => total + Number(exp[0]), 0) ? user.expenses.reduce((total, exp) => total + Number(exp[0]), 0) : 0}
                     </span>
                   </div>
                 </div>
@@ -614,8 +620,17 @@ function App() {
                               type="text"
                               placeholder='₹ Amount'
                               className='w-20 px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
-                              onChange={(e) => handleExpenseAmountChange(index, expIndex, e.target.value)}
-                              value={user.expenses[expIndex][0]==0? '' : user.expenses[expIndex][0]}
+                              onChange={(e) => {
+                                const value = e.target.value;
+                                // Allow only digits and optionally decimal point
+                                if (/^\d*\.?\d{0,2}$/.test(value) || value === '') {
+                                  handleExpenseAmountChange(index, expIndex, value)
+                                }
+
+                              }}
+                              // value={user.expenses[expIndex][0]==0? '' : user.expenses[expIndex][0]}
+                              // value={`$${user.expenses[expIndex][0]}`}
+                              value={user.expenses[expIndex][0]}
                             />
                           </div>
 
