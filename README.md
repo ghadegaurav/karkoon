@@ -1,12 +1,19 @@
-# React + Vite
+# Karkoon – Smart Bill Splitter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Karkoon** is a modern bill-splitting app built to make group expenses fair, flexible, and frustration-free.
 
-Currently, two official plugins are available:
+This is the upgraded version of the basic site – now packed with powerful features and a smoother user experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Key Features
 
-## Expanding the ESLint configuration
+- ➕ Add **multiple expenses** per user
+- 👥 Split expenses with everyone or **selected users only** (e.g., veg vs. non-veg scenarios)
+- ❌ **Remove users** anytime from the group
+- 🎨 **Updated UI** for a cleaner and more intuitive, no-nonsense experience
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🌐 Live App
+
+Check out the live version here: [Karkoon App](https://ghadegaurav.github.io/karkoon/)
+
+Built to make “Who owes what?” a thing of the past.
+**Fair splits. Simple design. Real flexibility.**
