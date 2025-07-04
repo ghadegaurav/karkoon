@@ -658,7 +658,7 @@ function App() {
                                       </div>
                                     ))}
 
-                                    {expense[1].length > 10 && (
+                                    {expense[1].length > 8 && (
                                       <div
                                         className="w-8 h-8 rounded-full bg-gray-500 border-2 border-white flex items-center justify-center text-white text-xs font-bold"
                                         style={{
